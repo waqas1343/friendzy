@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:friend_zone/constant/custom_text/custom_text.dart';
 import 'package:friend_zone/utils/app_strings/app_strings.dart';
-import 'package:friend_zone/utils/text_theme/app_icon/app_icons.dart';
+import 'package:friend_zone/utils/app_icon/app_icons.dart';
 import 'package:friend_zone/widgets/messenger_story/messenger_story.dart';
 import '../../widgets/app_card/app_card.dart';
 import '../../widgets/custom_tab_button.dart/custom_tab_widget.dart';
@@ -12,7 +12,7 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme; 
+    final textTheme = Theme.of(context).textTheme;
 
     return SafeArea(
       child: Scaffold(
@@ -44,6 +44,8 @@ class DashboardScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 CustomTabButtons(),
                 const SizedBox(height: 10),
+                CustomCardWidget(),
+                const SizedBox(height: 8),
                 CustomCardWidget(),
               ],
             ),

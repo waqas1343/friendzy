@@ -25,7 +25,7 @@ class DashboardScreen2 extends StatelessWidget {
         children: [
           screens[provider.selectedIndex],
           Positioned(
-            bottom: 10,
+            bottom: 20,
             left: 16,
             right: 16,
             child: CustomBottomNavBar(),
@@ -37,19 +37,19 @@ class DashboardScreen2 extends StatelessWidget {
 }
 
 class CustomBottomNavBar extends StatelessWidget {
+  const CustomBottomNavBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<TabProvider>(context);
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+      padding: EdgeInsets.symmetric(horizontal: 2, vertical: 4),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.9),
         borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
             color: Colors.black26,
-            blurRadius: 20,
-            spreadRadius: 5,
           )
         ],
       ),
@@ -72,7 +72,7 @@ class CustomBottomNavBar extends StatelessWidget {
       onTap: () => provider.setSelectedIndex(index),
       child: AnimatedContainer(
         duration: Duration(milliseconds: 300),
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.all(4),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: isSelected ? Colors.blue : Colors.transparent,
@@ -90,16 +90,14 @@ class CustomBottomNavBar extends StatelessWidget {
     return GestureDetector(
       onTap: () => provider.setSelectedIndex(2),
       child: Container(
-        width: 60,
-        height: 60,
+        width: 50,
+        height: 50,
         decoration: BoxDecoration(
           color: Colors.blue,
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
               color: Colors.blueAccent,
-              blurRadius: 15,
-              spreadRadius: 3,
             )
           ],
         ),

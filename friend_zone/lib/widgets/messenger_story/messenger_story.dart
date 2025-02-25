@@ -4,21 +4,38 @@ import 'package:sizer/sizer.dart';
 
 class MessengerStoriesList extends StatelessWidget {
   final List<Map<String, String>> friends = [
+    {"name": "Ali Shaan", "image": AppImages.headshot1},
     {
-      "name": "Selena",
-      "image": "https://randomuser.me/api/portraits/women/1.jpg"
+      "name": "Waqas",
+      "image": AppImages.headshot2,
     },
     {
-      "name": "Clara",
-      "image": "https://randomuser.me/api/portraits/women/2.jpg"
+      "name": "Tehami",
+      "image": AppImages.headshot3,
     },
     {
-      "name": "Fabian",
-      "image": "https://randomuser.me/api/portraits/men/3.jpg"
+      "name": "Mohsin",
+      "image": AppImages.headshot4,
     },
     {
-      "name": "George",
-      "image": "https://randomuser.me/api/portraits/men/4.jpg"
+      "name": "Faheem",
+      "image": AppImages.headshot5,
+    },
+    {
+      "name": "Shahzaib",
+      "image": AppImages.headshot6,
+    },
+    {
+      "name": "Abdullah",
+      "image": AppImages.headshot7,
+    },
+    {
+      "name": "Saim",
+      "image": AppImages.headshot8,
+    },
+    {
+      "name": "Khaleel",
+      "image": AppImages.headshot9,
     },
   ];
 
@@ -52,7 +69,7 @@ class MessengerStoriesList extends StatelessWidget {
                         backgroundImage: index == 0
                             ? const AssetImage(AppImages.waqasImage)
                                 as ImageProvider
-                            : NetworkImage(friends[index - 1]["image"]!),
+                            : AssetImage(friends[index - 1]["image"]!),
                       ),
                     ),
                     if (index == 0)
