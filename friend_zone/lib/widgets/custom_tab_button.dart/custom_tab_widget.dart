@@ -5,11 +5,13 @@ import 'package:sizer/sizer.dart';
 import '../../view_model/controller/tab_controller/tab_controller.dart';
 
 class CustomTabButtons extends StatelessWidget {
+  const CustomTabButtons({super.key});
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<TabProvider>(context);
     return Container(
-      padding: EdgeInsets.all(1.h),
+      padding: EdgeInsets.all(0.5.h),
       decoration: BoxDecoration(
         color: AppColors.btnColor,
         borderRadius: BorderRadius.circular(5.h),
@@ -32,16 +34,14 @@ Widget tabButton(
   return GestureDetector(
     onTap: () => context.read<TabProvider>().setSelectedIndex(index),
     child: Container(
-      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 1.5.h),
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 1.h),
       decoration: BoxDecoration(
         color: isSelected ? Colors.white : Colors.transparent,
-        borderRadius: BorderRadius.circular(3.h),
+        borderRadius: BorderRadius.circular(4.h),
         boxShadow: isSelected
             ? [
                 BoxShadow(
                   color: Colors.black26,
-                  blurRadius: 1.h,
-                  offset: Offset(0, 0.3.h),
                 ),
               ]
             : [],

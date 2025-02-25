@@ -96,7 +96,7 @@ class CustomCardWidget extends StatelessWidget {
         ),
         Positioned(
           right: 0,
-          top: 10.h,
+          top: 7.h,
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 1.5.h, horizontal: 2.w),
             decoration: BoxDecoration(

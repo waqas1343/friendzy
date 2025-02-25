@@ -52,7 +52,7 @@ class MessengerStoriesList extends StatelessWidget {
         itemCount: friends.length + 1,
         itemBuilder: (context, index) {
           return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 2.w),
+            padding: EdgeInsets.symmetric(horizontal: 1.w),
             child: Column(
               children: [
                 Stack(
@@ -74,7 +74,7 @@ class MessengerStoriesList extends StatelessWidget {
                     ),
                     if (index == 0)
                       CircleAvatar(
-                        radius: 1.8.h,
+                        radius: 1.4.h,
                         backgroundColor: Colors.blue,
                         child:
                             Icon(Icons.add, color: Colors.white, size: 1.8.h),

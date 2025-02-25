@@ -26,6 +26,8 @@ class MatchProvider extends ChangeNotifier {
 }
 
 class FriendScreen extends StatelessWidget {
+  const FriendScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<MatchProvider>(context);

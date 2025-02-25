@@ -23,7 +23,7 @@ class DashboardScreen2 extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          screens[provider.selectedIndex],
+          screens[provider.selectedIndex2],
           Positioned(
             bottom: 20,
             left: 16,
@@ -67,9 +67,9 @@ class CustomBottomNavBar extends StatelessWidget {
   }
 
   Widget _buildNavItem(IconData icon, int index, TabProvider provider) {
-    bool isSelected = provider.selectedIndex == index;
+    bool isSelected = provider.selectedIndex2 == index;
     return GestureDetector(
-      onTap: () => provider.setSelectedIndex(index),
+      onTap: () => provider.setSelectedIndex2(index),
       child: AnimatedContainer(
         duration: Duration(milliseconds: 300),
         padding: EdgeInsets.all(4),
@@ -88,7 +88,7 @@ class CustomBottomNavBar extends StatelessWidget {
 
   Widget _buildCenterButton(TabProvider provider) {
     return GestureDetector(
-      onTap: () => provider.setSelectedIndex(2),
+      onTap: () => provider.setSelectedIndex2(2),
       child: Container(
         width: 50,
         height: 50,

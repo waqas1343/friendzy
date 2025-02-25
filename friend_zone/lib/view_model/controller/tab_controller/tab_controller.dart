@@ -7,4 +7,11 @@ class TabProvider extends ChangeNotifier {
     selectedIndex = index;
     notifyListeners();
   }
+
+  int selectedIndex2 = 0;
+
+  void setSelectedIndex2(int index) {
+    selectedIndex2 = index;
+    notifyListeners();
+  }
 }
