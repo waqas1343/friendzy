@@ -8,44 +8,49 @@ class AppTheme {
       scaffoldBackgroundColor: AppColors.appBackground,
       fontFamily: "Montserrat",
       textTheme: TextTheme(
-        headlineLarge: const TextStyle(
-          fontSize: 32.0,
-          fontWeight: FontWeight.bold,
-          color: AppColors.blackTextClr,
-        ),
-        headlineMedium: const TextStyle(
-          fontSize: 24.0,
-          fontWeight: FontWeight.w900,
-          color: AppColors.blackTextClr,
-        ),
-        headlineSmall: const TextStyle(
-          fontSize: 20.0,
-          fontWeight: FontWeight.w600,
-          color: AppColors.textColor,
-        ),
-        titleLarge: const TextStyle(
-          fontSize: 14.0,
-          fontWeight: FontWeight.w600,
-          color: AppColors.appBackground,
-        ),
-        titleMedium: const TextStyle(
-          fontSize: 14.0,
-          fontWeight: FontWeight.w700,
-          color: AppColors.textColorGrey,
-        ),
-        titleSmall: TextStyle(
-          fontSize: 14.0,
-          fontWeight: FontWeight.w600,
-          color: AppColors.primaryColor,
-        ),
-      ),
+          headlineLarge: const TextStyle(
+            fontSize: 32.0,
+            fontWeight: FontWeight.bold,
+            color: AppColors.blackTextClr,
+          ),
+          headlineMedium: const TextStyle(
+            fontSize: 24.0,
+            fontWeight: FontWeight.w900,
+            color: AppColors.blackTextClr,
+          ),
+          headlineSmall: const TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.w600,
+            color: AppColors.textColor,
+          ),
+          titleLarge: const TextStyle(
+            fontSize: 14.0,
+            fontWeight: FontWeight.w600,
+            color: AppColors.appBackground,
+          ),
+          titleMedium: const TextStyle(
+            fontSize: 15.0,
+            fontWeight: FontWeight.w700,
+            color: AppColors.textColorGrey,
+          ),
+          titleSmall: TextStyle(
+            fontSize: 14.0,
+            fontWeight: FontWeight.w600,
+            color: AppColors.primaryColor,
+          ),
+          bodySmall: TextStyle(
+            fontSize: 12.0,
+            fontWeight: FontWeight.w600,
+            color: AppColors.primaryColor,
+          )),
     );
   }
 
   static ThemeData get darkTheme {
     return ThemeData(
       brightness: Brightness.dark,
-      scaffoldBackgroundColor: AppColors.darkBackground,
+      scaffoldBackgroundColor:
+          const Color.fromARGB(255, 39, 34, 51).withOpacity(1),
       fontFamily: "Montserrat",
       textTheme: const TextTheme(
         headlineLarge: TextStyle(

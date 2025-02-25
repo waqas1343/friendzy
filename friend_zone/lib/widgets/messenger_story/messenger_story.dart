@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:friend_zone/utils/color_utils/app_colors.dart';
+import 'package:friend_zone/utils/app_images/app_images.dart';
+import 'package:sizer/sizer.dart';
 
 class MessengerStoriesList extends StatelessWidget {
   final List<Map<String, String>> friends = [
@@ -21,75 +22,56 @@ class MessengerStoriesList extends StatelessWidget {
     },
   ];
 
+  MessengerStoriesList({super.key});
+
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return SizedBox(
-      height: 100,
+      height: 12.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: friends.length + 1,
         itemBuilder: (context, index) {
-          if (index == 0) {
-           
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Column(
-                children: [
-                  Stack(
-                    alignment: Alignment.bottomRight,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(3),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.blue, width: 2),
-                        ),
-                        child: CircleAvatar(
-                          radius: 30,
-                          backgroundImage: AssetImage('assets/your_story.jpg'),
-                        ),
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 2.w),
+            child: Column(
+              children: [
+                Stack(
+                  alignment: Alignment.bottomRight,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(0.3.h),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.blue, width: 0.5.w),
                       ),
+                      child: CircleAvatar(
+                        radius: 4.h,
+                        backgroundImage: index == 0
+                            ? const AssetImage(AppImages.waqasImage)
+                                as ImageProvider
+                            : NetworkImage(friends[index - 1]["image"]!),
+                      ),
+                    ),
+                    if (index == 0)
                       CircleAvatar(
-                        radius: 10,
+                        radius: 1.8.h,
                         backgroundColor: Colors.blue,
-                        child: Icon(Icons.add, color: Colors.white, size: 16),
+                        child:
+                            Icon(Icons.add, color: Colors.white, size: 1.8.h),
                       ),
-                    ],
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    "My Story",
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                ],
-              ),
-            );
-          } else {
-            final friend = friends[index - 1];
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(3),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.blue, width: 2),
-                    ),
-                    child: CircleAvatar(
-                      radius: 30,
-                      backgroundImage: NetworkImage(friend["image"]!),
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    friend["name"]!,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                ],
-              ),
-            );
-          }
+                  ],
+                ),
+                SizedBox(height: 1.h),
+                Text(
+                  index == 0 ? "My Story" : friends[index - 1]["name"]!,
+                  style: textTheme.titleMedium?.copyWith(fontSize: 13.sp),
+                ),
+              ],
+            ),
+          );
         },
       ),
     );

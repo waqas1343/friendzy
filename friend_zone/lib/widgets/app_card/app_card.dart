@@ -1,28 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:friend_zone/utils/app_images/app_images.dart';
 import 'package:friend_zone/utils/color_utils/app_colors.dart';
+import 'package:sizer/sizer.dart';
 
 class CustomCardWidget extends StatelessWidget {
+  const CustomCardWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(2.h),
       child: Stack(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(3.h),
             child: Image.asset(
               AppImages.mountainImage,
               width: double.infinity,
-              height: 250,
+              height: 35.h,
               fit: BoxFit.cover,
             ),
           ),
           Positioned.fill(
             child: Container(
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(3.h),
                 gradient: LinearGradient(
-                  colors: [Colors.black.withOpacity(0.4), Colors.transparent],
+                  colors: [Colors.black.withValues(), Colors.transparent],
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
                 ),
@@ -30,58 +34,63 @@ class CustomCardWidget extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 10,
-            left: 10,
+            top: 1.h,
+            left: 1.h,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.8),
-                borderRadius: BorderRadius.circular(20),
+                color: Colors.white.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(3.h),
               ),
               child: Row(
                 children: [
-                  Icon(Icons.emoji_nature, color: Colors.green, size: 16),
-                  SizedBox(width: 5),
+                  Icon(Icons.emoji_nature, color: Colors.green, size: 3.h),
+                  SizedBox(width: 3.w),
                   Text(
                     "Travel",
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.sp,
+                        ),
                   ),
                 ],
               ),
             ),
           ),
           Positioned(
-            bottom: 60,
-            left: 10,
-            right: 80,
+            bottom: 8.h,
+            left: 2.w,
+            right: 20.w,
             child: Text(
               "If you could live anywhere in the world, where would you pick?",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Colors.white,
+                    fontSize: 17.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
           ),
           Positioned(
-            bottom: 10,
-            left: 10,
+            bottom: 2.h,
+            left: 2.w,
             child: Row(
               children: [
                 CircleAvatar(
                   backgroundImage: AssetImage(AppImages.waqasImage),
-                  radius: 24,
+                  radius: 3.h,
                 ),
-                SizedBox(width: 20),
+                SizedBox(width: 2.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "Miranda Kehlani",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    Text(
+                      "STUTTGART",
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
-                    Text("STUTTGART",
-                        style: Theme.of(context).textTheme.titleMedium),
                   ],
                 ),
               ],
@@ -89,19 +98,22 @@ class CustomCardWidget extends StatelessWidget {
           ),
           Positioned(
             right: 0,
-            top: 60,
+            top: 10.h,
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+              padding: EdgeInsets.symmetric(vertical: 1.5.h, horizontal: 2.w),
               decoration: BoxDecoration(
                 color: AppColors.cardColor,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(3.h),
+                  bottomLeft: Radius.circular(3.h),
+                ),
               ),
               child: Column(
                 children: [
                   _floatingButton(Icons.thumb_up_alt_outlined),
-                  SizedBox(height: 10),
+                  SizedBox(height: 1.h),
                   _floatingButton(Icons.chat_bubble_outline),
-                  SizedBox(height: 10),
+                  SizedBox(height: 1.h),
                   _floatingButton(Icons.more_horiz),
                 ],
               ),
@@ -113,20 +125,25 @@ class CustomCardWidget extends StatelessWidget {
   }
 
   Widget _floatingButton(IconData icon) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.3),
-        shape: BoxShape.circle,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 5,
-            spreadRadius: 1,
-          ),
-        ],
+    return GestureDetector(
+      onTap: () {
+        print("Button Pressed: $icon");
+      },
+      child: Container(
+        padding: EdgeInsets.all(1.5.h),
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.3),
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 1.h,
+              spreadRadius: 0.5.w,
+            ),
+          ],
+        ),
+        child: Icon(icon, color: Colors.white, size: 2.5.h),
       ),
-      child: Icon(icon, color: Colors.white),
     );
   }
 }

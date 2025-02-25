@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:friend_zone/utils/color_utils/app_colors.dart';
+import 'package:sizer/sizer.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -10,7 +11,7 @@ class CustomButton extends StatelessWidget {
   final Color textColor;
   final String iconPath;
 
-  const CustomButton({
+  CustomButton({
     super.key,
     required this.text,
     required this.onTap,
@@ -55,8 +56,6 @@ class CustomButton extends StatelessWidget {
                 fontFamily: "Montserrat",
               ),
             ),
-            
-            
           ],
         ),
       ),

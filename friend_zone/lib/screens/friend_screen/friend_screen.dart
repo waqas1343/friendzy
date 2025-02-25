@@ -1,7 +1,8 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
+import '../../utils/color_utils/app_colors.dart';
 
 class MatchProvider extends ChangeNotifier {
   List<Map<String, dynamic>> matches = [
@@ -21,22 +22,6 @@ class MatchProvider extends ChangeNotifier {
       'match': '94%',
       'image': 'assets/images/w_image.png'
     },
-    {
-      'name': 'Eddie',
-      'age': 23,
-      'location': 'Dortmund',
-      'distance': '2 km away',
-      'match': '94%',
-      'image': 'assets/images/w_image.png'
-    },
-    {
-      'name': 'Eddie',
-      'age': 23,
-      'location': 'Dortmund',
-      'distance': '2 km away',
-      'match': '94%',
-      'image': 'assets/images/w_image.png'
-    },
   ];
 }
 
@@ -44,78 +29,92 @@ class FriendScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<MatchProvider>(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Matches',
-            style: TextStyle(fontWeight: FontWeight.bold)),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.settings))
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+    final textTheme = Theme.of(context).textTheme;
+
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: AppColors.appBackground,
+          title: Text(
+            'Matches',
+            style: textTheme.headlineMedium,
+          ),
+          actions: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.settings))
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(4.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildIconWithText(Icons.favorite, 'Likes', '32'),
-                SizedBox(
-                  width: 20,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    _buildIconWithText(
+                        Icons.favorite, 'Likes', '32', textTheme),
+                    SizedBox(width: 5.w),
+                    _buildIconWithText(Icons.chat, 'Connect', '15', textTheme),
+                  ],
                 ),
-                _buildIconWithText(Icons.chat, 'Connect', '15'),
+                SizedBox(height: 2.h),
+                Text(
+                  'Your Matches 47',
+                  style: textTheme.headlineSmall,
+                ),
+                SizedBox(height: 2.h),
+                SizedBox(
+                  height: 60.h,
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.7,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                    ),
+                    itemCount: provider.matches.length,
+                    itemBuilder: (context, index) {
+                      return _buildMatchCard(
+                          provider.matches[index], context, textTheme);
+                    },
+                  ),
+                ),
               ],
             ),
-            const SizedBox(height: 16),
-            const Text('Your Matches 47',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 16),
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.7,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                ),
-                itemCount: 4,
-                itemBuilder: (context, index) {
-                  return _buildMatchCard(provider.matches[index]);
-                },
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildIconWithText(IconData icon, String text, String count) {
+  Widget _buildIconWithText(
+      IconData icon, String text, String count, TextTheme textTheme) {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.all(4), // Border ke liye spacing
+          padding: EdgeInsets.all(1.w),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(color: Colors.blue, width: 3), // Circular Border
+            border: Border.all(color: AppColors.primaryColor, width: 1.w),
           ),
           child: ClipOval(
             child: Stack(
-              alignment: Alignment.center,
               children: [
                 Image.asset(
                   'assets/images/w_image.png',
-                  width: 80,
-                  height: 80,
+                  width: 20.w,
+                  height: 20.w,
                   fit: BoxFit.cover,
                 ),
                 Positioned.fill(
                   child: BackdropFilter(
-                    filter:
-                        ImageFilter.blur(sigmaX: 6, sigmaY: 6), // Blur Effect
+                    filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
                     child: Container(
-                      color: Colors.white.withOpacity(0.2), // Light Overlay
+                      color: Colors.white.withOpacity(0.2),
                     ),
                   ),
                 ),
@@ -123,30 +122,31 @@ class FriendScreen extends StatelessWidget {
                   child: Icon(
                     icon,
                     color: Colors.white,
-                    size: 30,
+                    size: 6.w,
                   ),
                 ),
               ],
             ),
           ),
         ),
-        const SizedBox(height: 8),
-        Text(text, style: const TextStyle(fontWeight: FontWeight.bold)),
-        Text(count, style: const TextStyle(color: Colors.blue)),
+        SizedBox(height: 1.h),
+        Text(text, style: textTheme.titleMedium),
+        Text(count, style: TextStyle(color: AppColors.primaryColor)),
       ],
     );
   }
 
-  Widget _buildMatchCard(Map<String, dynamic> match) {
+  Widget _buildMatchCard(
+      Map<String, dynamic> match, BuildContext context, TextTheme textTheme) {
     return Stack(
       children: [
         Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: Colors.blue, width: 3), // Border Added
+            borderRadius: BorderRadius.circular(4.w),
+            border: Border.all(color: AppColors.primaryColor, width: 1.w),
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(4.w),
             child: Image.asset(
               match['image'],
               width: double.infinity,
@@ -155,55 +155,62 @@ class FriendScreen extends StatelessWidget {
             ),
           ),
         ),
-
-        /// Match Percentage Tag (Top Left)
         Positioned(
-          left: 25,
+          left: 6.w,
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: const BoxDecoration(
-              color: Colors.blue,
+            padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+            decoration: BoxDecoration(
+              color: AppColors.primaryColor,
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(12),
-                bottomRight: Radius.circular(12),
+                bottomLeft: Radius.circular(3.w),
+                bottomRight: Radius.circular(3.w),
               ),
             ),
             child: Text(
               '${match['match']} Match',
-              style: const TextStyle(
-                  color: Colors.white, fontWeight: FontWeight.bold),
+              style: textTheme.titleLarge!.copyWith(
+                color: Colors.white,
+              ),
             ),
           ),
         ),
-
-        /// Match Details (Bottom)
         Positioned(
-          bottom: 8,
-          left: 8,
-          right: 8,
+          bottom: 2.h,
+          left: 5.w,
+          right: 3.w,
           child: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.6),
-              borderRadius: BorderRadius.circular(12),
-            ),
+            padding: EdgeInsets.all(2.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Container(
+                  height: 30,
+                  width: 100,
+                  decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.6),
+                      borderRadius: BorderRadius.circular(50)),
+                  child: Center(
+                    child: Text(
+                      match['distance'],
+                      style: textTheme.titleSmall!.copyWith(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
                 Text(
                   '${match['name']}, ${match['age']}',
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
+                  style: textTheme.headlineSmall!.copyWith(
+                    color: Colors.white70,
+                  ),
                 ),
-                Text(
-                  match['location'],
-                  style: const TextStyle(color: Colors.white70),
-                ),
-                Text(
-                  match['distance'],
-                  style: const TextStyle(color: Colors.white70),
+                Center(
+                  child: Text(
+                    match['location'],
+                    style: textTheme.bodySmall!.copyWith(
+                      color: Colors.white70,
+                    ),
+                  ),
                 ),
               ],
             ),

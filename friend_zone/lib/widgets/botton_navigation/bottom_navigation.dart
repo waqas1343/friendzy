@@ -21,8 +21,17 @@ class DashboardScreen2 extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<TabProvider>(context);
     return Scaffold(
-      body: screens[provider.selectedIndex],
-      bottomNavigationBar: CustomBottomNavBar(),
+      body: Stack(
+        children: [
+          screens[provider.selectedIndex],
+          Positioned(
+            bottom: 10,
+            left: 16,
+            right: 16,
+            child: CustomBottomNavBar(),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -32,16 +41,15 @@ class CustomBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<TabProvider>(context);
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.white.withOpacity(0.9),
         borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
             color: Colors.black26,
-            blurRadius: 10,
-            spreadRadius: 2,
+            blurRadius: 20,
+            spreadRadius: 5,
           )
         ],
       ),
@@ -60,7 +68,6 @@ class CustomBottomNavBar extends StatelessWidget {
 
   Widget _buildNavItem(IconData icon, int index, TabProvider provider) {
     bool isSelected = provider.selectedIndex == index;
-
     return GestureDetector(
       onTap: () => provider.setSelectedIndex(index),
       child: AnimatedContainer(
@@ -83,16 +90,16 @@ class CustomBottomNavBar extends StatelessWidget {
     return GestureDetector(
       onTap: () => provider.setSelectedIndex(2),
       child: Container(
-        width: 50,
-        height: 50,
+        width: 60,
+        height: 60,
         decoration: BoxDecoration(
           color: Colors.blue,
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
               color: Colors.blueAccent,
-              blurRadius: 10,
-              spreadRadius: 2,
+              blurRadius: 15,
+              spreadRadius: 3,
             )
           ],
         ),
